@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="my_1">
+    <script></script>
+    <h1>hello world!</h1>
+    <h2>This is my first page!</h2>
+    <p>This is my first paragraph!</p>
+    <h2>i can test for my html!</h2>
+</body>
+<body id="my_2">
+    <img src="https://www.baidu.com/img/bd_logo1.png" alt="你好" width="500px" height="250px">
+    <a href="https://www.baidu.com" target="_blank" title="点我打开百度"><img src="https://www.baidu.com/img/bd_logo1.png" title="点击跳转百度"></a>
+</body>
+<body>
+    <p id="1">这是第一个段落</p>
+    <p>e</p>
+    <p>e</p>
+    <p>e</p>
+    <p>eE</p>
+    <p>E</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p>E</p>
+    <p>E</p>
+    <p id="2">这是第二个段落</p>
+    <a href="#1">点击跳转第一段</a>
+    <a href="#2">点击跳转第二段</a>
+</body>
+<body>
+    <h1>在百度上搜索问题</h1>
+    <form id="searchForm" onsubmit="searchBaidu(); return false;">
+        <label for="query">问题：</label>
+        <input type="text" id="query" name="query" required>
+        <input type="submit" value="搜索">
+    </form>
+
+    <script>
+        function searchBaidu() {
+            var query = document.getElementById("query").value;
+            var searchUrl = "https://www.baidu.com/s?wd=" + encodeURIComponent(query);
+            window.location.href = searchUrl;
+        }
+    </script>
+
+<form action="form-handler.php" method="post">
+    <fieldset>
+        <legend>Personal Information</legend>
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname">
+        <br>
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname">
+    </fieldset>
+</form>
+
+</body>
+</html>
