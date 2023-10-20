@@ -18,8 +18,8 @@ public class LawCrawl {
   public static void CrawlLaw() throws IOException {
     Document document= Jsoup.connect("http://www.dffyw.com/faguixiazai/xf/200311/20031111130912.htm").get();
     Elements lawElements=document.select("div.rich_media_content>p");
-    //System.out.println(lawElements);
-    //System.out.println(lawElements.size());
+    System.out.println(lawElements);
+    System.out.println(lawElements.size());
     for(int i=0;i< lawElements.size();i++){
       Elements elements=lawElements.get(i).select("p");
       System.out.println(elements);
