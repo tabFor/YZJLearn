@@ -44,9 +44,8 @@ public class lawcrawl {
   public static void getUrl()throws IOException {
     Document document = Jsoup.connect("https://www.66law.cn/tiaoli/search.aspx?pushUnit=%E5%85%A8%E5%9B%BD%E4%BA%BA%E6%B0%91%E4%BB%A3%E8%A1%A8%E5%A4%A7%E4%BC%9A%E5%B8%B8%E5%8A%A1%E5%A7%94%E5%91%98%E4%BC%9A&valid=1&potenceLevel=2")
         .get();
-    Elements lawElements = document.select("div.fagui-list.mt30");
     //System.out.println(lawElements.size());
-    for(int i=0;i< lawElements.size();i++){
+    /*for(int i=0;i< lawElements.size();i++){
       Elements elements=lawElements.get(i).select("li");
       Elements elements1=elements.select("h3>a");
       //System.out.println(elements1);
@@ -58,26 +57,38 @@ public class lawcrawl {
         //System.out.println(name+":"+urltemp);
         CrawlLaw(urltemp,name);
       }
-    }
+    }*/
     WebDriver webDriver = new ChromeDriver();
     try {
       webDriver.get("https://www.66law.cn/tiaoli/search.aspx?pushUnit=%E5%85%A8%E5%9B%BD%E4%BA%BA%E6%B0%91%E4%BB%A3%E8%A1%A8%E5%A4%A7%E4%BC%9A%E5%B8%B8%E5%8A%A1%E5%A7%94%E5%91%98%E4%BC%9A&valid=1&potenceLevel=2");
 
       int totalPages = 13;
       for (int page = 1; page <= totalPages; page++) {
-        WebElement nextPageButton = webDriver.findElement(By.linkText("下一页"));
-        nextPageButton.click();
         // 使用显示等待等待新页面加载
-        WebDriverWait wait = new WebDriverWait(webDriver, 100);
+        //WebDriverWait wait = new WebDriverWait(webDriver, 100);
         //wait.until(ExpectedConditions.urlContains("page=" + (page + 1)));
-        // 等待和提取数据
-        // ...
-        // 在下一页之前等待一段时间以防止访问过于频繁
+        Elements lawElements = document.select("div.fagui-list.mt30");
+        System.out.println(lawElements);
+        for(int i=0;i< lawElements.size();i++){
+          Elements elements=lawElements.get(i).select("li");
+          Elements elements1=elements.select("h3>a");
+          System.out.println(elements1);
+          for(Element element:elements1){
+            //System.out.println(element);
+            String urltemp="https://www.66law.cn";
+            urltemp+=element.attr("href");
+            String name=element.text();
+            System.out.println(name+":"+urltemp);
+            CrawlLaw(urltemp,name);
+          }
+        }
         try {
-          Thread.sleep(2000);
+          Thread.sleep(10000);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
+        WebElement nextPageButton = webDriver.findElement(By.linkText("下一页"));
+        nextPageButton.click();
       }
     } finally {
       // 关闭浏览器
