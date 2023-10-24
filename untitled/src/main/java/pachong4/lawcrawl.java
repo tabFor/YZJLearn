@@ -2,8 +2,12 @@ package pachong4;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -30,7 +34,8 @@ public class lawcrawl {
     Elements getLaw=document.select("div.rich_media_content");
     File file=new File("untitled\\src\\"+name+".txt");
     FileWriter fileWriter=new FileWriter(file);
-    BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+    Charset charset=Charset.forName("UTF-8");
+    BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(new FileOutputStream("untitled\\src\\"+name+".txt"),charset));
     for(int i=0;i<getLaw.size();i++){
       Elements elements=getLaw.get(i).select("p");
       for(Element element:elements){
