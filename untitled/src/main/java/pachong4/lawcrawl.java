@@ -35,9 +35,13 @@ public class lawcrawl {
       Elements elements=getLaw.get(i).select("p");
       for(Element element:elements){
         String temp=element.text();
-        //System.out.println(temp);
-        bufferedWriter.write(temp);
-        bufferedWriter.newLine();
+        System.out.println(temp);
+        if(ifNewLine(temp)){
+          bufferedWriter.newLine();
+          bufferedWriter.write(temp);
+        }else{
+          bufferedWriter.write(temp);
+        }
       }
       bufferedWriter.close();
     }
@@ -107,6 +111,27 @@ public class lawcrawl {
       }
     }
     System.out.println("不在需要的法律范围内");
+    return false;
+  }
+  public static boolean ifNewLine(String temp){
+    int position=0;
+    for(int i=0;i<temp.length();i++){
+      if(temp.charAt(i)==' '){
+        continue;
+      }
+      if(temp.charAt(i)=='第'){
+        if(position==0){
+          return true;
+        }else{
+          return false;
+        }
+      }
+    }
+    /*int pos=temp.indexOf("第");
+    if(pos==0){
+      System.out.println("换行");
+      return true;
+    }*/
     return false;
   }
 }
