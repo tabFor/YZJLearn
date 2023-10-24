@@ -32,7 +32,7 @@ public class lawcrawl {
     FileWriter fileWriter=new FileWriter(file);
     BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
     for(int i=0;i<getLaw.size();i++){
-      Elements elements=getLaw.get(i).select("div");
+      Elements elements=getLaw.get(i).select("p");
       for(Element element:elements){
         String temp=element.text();
         //System.out.println(temp);
@@ -52,17 +52,19 @@ public class lawcrawl {
       webDriver.get("http://www.dffyw.com/faguixiazai/msf/index.html");
       int totalPages = 18;
       for (int page = 1; page <= totalPages; page++) {
+        System.out.println("这是第"+page+"页");
         // 使用显示等待等待新页面加载
         //WebDriverWait wait = new WebDriverWait(webDriver, 100);
         //wait.until(ExpectedConditions.urlContains("page=" + (page + 1)));
         String tempurl=webDriver.getCurrentUrl();
-        System.out.println(tempurl);
+        //System.out.println(tempurl);
         Document document=Jsoup.connect(tempurl).get();
         Elements lawElements = document.select("div.rich_media_inner");
+        //System.out.println(lawElements.size());
         for(int i=0;i< lawElements.size();i++){
           Elements elements=lawElements.get(i).select("li");
           Elements elements1=elements.select("a");
-          System.out.println(elements1);
+          //System.out.println(elements1);
           for(Element element:elements1){
             //System.out.println(element);
             String urltemp="http://www.dffyw.com/";
@@ -72,8 +74,10 @@ public class lawcrawl {
             /*if(name.length()==0||name.equals("现行有效")||name.equals("失效")||name.equals("尚未生效")||name.equals("已被修改")||name.equals("部分失效")){
               continue;
             }*/
-            System.out.println(name+":"+"https://www.dffyw.com/"+urltemp);
-            CrawlLaw(urltemp,name);
+            //System.out.println(name+":"+"https://www.dffyw.com/"+urltemp);
+            if(IfGet(name)){
+              CrawlLaw(urltemp,name);
+            }
           }
         }
         try {
@@ -95,11 +99,14 @@ public class lawcrawl {
     "商业特许经营管理办法","知识产权法","专利法","著作权法","商业秘密法","不正当竞争法","网络交易管理办法","国际贸易法","进出口管理条例","外商投资法",
     "个人信息保护法","数据安全法","税收法","关税法","保险法","金融法","证券法","企业法","商事制度改革法","国有资产法","房地产法","土地管理法","建筑法",
     "交通运输法","货物运输法","仓储法","物权法","信用证法","信托法","保函法","担保法","破产法","企业破产法","证券交易法","投资法","外汇管理法","国际私法","国际商事仲裁法","国际合同法","国际买卖法"};
-    for(int i=0;i<50;i++){
-      if(name.equals(tempName+temp)){
+    for(int i=0;i<49;i++){
+      //System.out.println("获取的法律名称为："+name);
+      //System.out.println("判断的法律名称为："+tempName+temp[i]);
+      if(name.equals(tempName+temp[i])){
         return true;
       }
     }
+    System.out.println("不在需要的法律范围内");
     return false;
   }
 }
